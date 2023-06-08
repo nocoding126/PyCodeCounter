@@ -12,6 +12,7 @@ import os
 from collections import defaultdict
 
 from pycounter.core import get_file_path, get_root_file_path, count_lines_python
+from pycounter.util import git_download
 
 
 ROOT_FILE_DIR = os.path.dirname(__file__)
@@ -50,4 +51,5 @@ def count_code_lines_by_project():
 
 
 if __name__ == '__main__':
+    git_download(ROOT_FILE_DIR)  # 下载项目
     count_code_lines_by_project()
