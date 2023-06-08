@@ -11,3 +11,8 @@
         python setup.py
     ```
     3. 查看控制台输出结果
+
+## 增加从代码平台直接获取代码仓库
+1. 配置文件
+    1. 在util.py最上方配置*GITHUB_ACCESS_TOKEN*和*GITLAB_ACCESS_TOKEN*，用于获取代码仓库凭证
+    2. 在util.py最上方配置USERNAME，用于需要获取代码仓库的*用户名*
