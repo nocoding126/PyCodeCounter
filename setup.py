@@ -21,15 +21,17 @@ def count_code_lines_by_project():
     """统计项目代码行数"""
     root_file_name = get_root_file_path(ROOT_FILE_DIR)
     file_path_list = get_file_path(ROOT_FILE_DIR)
-    file_path_list.remove(os.path.join(ROOT_FILE_DIR, 'setup.py'))
+    file_path_list.remove(os.path.join(ROOT_FILE_DIR, 'setup.py'))  # 移除根目录下setup.py文件，其他目录下的setup.py文件需要统计
     root_file_dict = defaultdict(int)
 
-    for root_file in root_file_name:
-        for file_path in file_path_list:
+    for root_file in root_file_name:  # 遍历项目根目录下的文件夹及文件
+        for file_path in file_path_list:  # 遍历项目下所有文件
             if root_file in file_path:
-                root_file_dict[root_file] += count_lines_python(file_path)
+                root_file_dict[root_file] += count_lines_python(file_path)  # 统计每个项目的代码行数
     # for project, lines in root_file_dict.items():
     #     print('项目***{}***代码行数为：─{}─'.format(project, lines))
+
+    """以下是ChatGPT产物，仅为了输出美观而使用"""
     # 计算输出中最长的项目名称和行数
     max_project_len = max([len(project) for project in root_file_dict.keys()])
     max_lines_len = len(str(max(root_file_dict.values())))
