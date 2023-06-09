@@ -12,15 +12,26 @@ import os
 import shutil
 import subprocess
 import requests
+import configparser
 
-# 设置访问令牌和用户名
-GITHUB_ACCESS_TOKEN = "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"
-GITEE_ACCESS_TOKEN = "9869e28af8e470980b5c50002afba4ac"
-USERNAME = ["duke1023", "nocoding126"]  # 目标用户用户名
+
+ROOT_FILE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+def get_config(section, option):
+    """获取配置文件"""
+    config = configparser.ConfigParser()
+    config.read(os.path.join(ROOT_FILE_DIR, "config.ini"), encoding="utf-8")
+    _value = config.get(section, option)
+    return _value
 
 
 def git_download(root_path):
     """从git上下载项目"""
+    # 设置访问令牌和用户名
+    GITHUB_ACCESS_TOKEN = get_config('access_token', 'GITHUB_ACCESS_TOKEN')
+    GITEE_ACCESS_TOKEN = get_config('access_token', 'GITEE_ACCESS_TOKEN')
+    USERNAME = get_config('username', 'USERNAME')  # 目标用户用户名
     for username in USERNAME:
         print(f"在gitee上查找用户{username}的项目...")
         # 发送获取仓库列表的 API 请求
@@ -69,4 +80,3 @@ def git_download(root_path):
 if __name__ == '__main__':
     ROOT_FILE_DIR = os.path.dirname(__file__)
     git_download(ROOT_FILE_DIR)
-
